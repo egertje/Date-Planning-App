@@ -1,0 +1,18 @@
+.title {
+    font-size: 2rem;
+}
+
+.card {
+    width: 24rem;
+    height: 17rem; 
+    cursor: pointer;
+}
+
+.card-icon {
+    width: 9.5rem;
+    height: 11rem;
+}
+
+.card-description {
+    font-size: 1.6rem;
+}
