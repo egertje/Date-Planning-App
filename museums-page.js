@@ -7,7 +7,7 @@ let currentWindow;
 let bounds;
 let service;
 let photoElement;
-const nameElement = document.querySelector(".restaurant-name");
+const nameElement = document.querySelector(".museums-name");
 const ratingElement = document.querySelector(".rating");
 const priceLevelElement = document.querySelector(".price-level");
 const addressElement = document.querySelector(".address");
@@ -18,7 +18,7 @@ function initMap() {
     infoWindow = new google.maps.InfoWindow;
     currentInfoWindow = infoWindow;
     bounds = new google.maps.LatLngBounds();
-    photoElement = document.getElementById('restaurant-photo');
+    photoElement = document.getElementById('museums-photo');
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
@@ -38,7 +38,7 @@ function initMap() {
             infoWindow.setContent('Location found!');
             infoWindow.open(map);
             map.setCenter(pos);
-            getRestaurants(pos);
+            getMuseums(pos);
         }, () => {
             // if user denied permission
             handleError(infoWindow);
@@ -65,14 +65,14 @@ function handleError(infoWindow) {
     infoWindow.open(map);
     currentInfoWindow = infoWindow;
 
-    getRestaurants(pos);
+    getMuseums(pos);
 }
 
-function getRestaurants(position) {
+function getMuseums(position) {
     let request = {
         location: position,
         rankBy: google.maps.places.RankBy.DISTANCE,
-        keyword: 'restaurants'
+        keyword: 'museums'
     };
 
     service = new google.maps.places.PlacesService(map);
@@ -121,11 +121,11 @@ function showMarkerInfo(placeResult, marker, status) {
         placeInfowindow.open(marker.map, marker);
         currentInfoWindow.close();
         currentInfoWindow = placeInfowindow;
-        showRestaurantInfo(placeResult);
+        showMuseumsInfo(placeResult);
     } 
 }
 
-function showRestaurantInfo(placeResult) {
+function showMuseumsInfo(placeResult) {
     // first clear the previous img
     while (photoElement.lastChild) {
         photoElement.removeChild(photoElement.lastChild);
@@ -142,7 +142,7 @@ function showRestaurantInfo(placeResult) {
     if (placeResult.photos) {
         restuarantPhoto = placeResult.photos[0];
         let photo = document.createElement('img');
-        photo.classList.add('restaurant-img');
+        photo.classList.add('museums-img');
         photo.src = restuarantPhoto.getUrl();
         photoElement.appendChild(photo);
     }
@@ -160,7 +160,7 @@ function showRestaurantInfo(placeResult) {
         addressElement.innerHTML = `<h6>${placeResult.formatted_address}</h6>`;
     }
     if (placeResult.opening_hours != null) {
-        isOpenElement.innerHTML = `<h6>${isRestaurantOpen(placeResult.opening_hours)}</h6>`;
+        isOpenElement.innerHTML = `<h6>${isHikingOpen(placeResult.opening_hours)}</h6>`;
     }
     if (placeResult.website) {
         websiteElement.innerHTML = `<h6>Visit ${placeResult.name}'s website <a href=${placeResult.website} target="_blank">here.</a></h6>`
@@ -183,7 +183,7 @@ function getPriceLevel(priceLevel) {
     }
 }
 
-function isRestaurantOpen(isOpen) {
+function isHikingOpen(isOpen) {
     return (isOpen ? 'Open now' : 'Closed');
 }
 
@@ -206,5 +206,4 @@ function getRating(rating) {
     else {
         return '';
     }
-
 }

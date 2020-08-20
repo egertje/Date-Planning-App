@@ -21,7 +21,7 @@ const activityCardData = [
     },
     {
         imgPath: './imgs/mini-golf-color-icon.png',
-        description: 'Bowling/Minigolf/Gaming',
+        description: 'Bowling/Mini golf/Gaming',
         route: 'gaming-page.html'
     },
     {

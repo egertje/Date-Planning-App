@@ -38,7 +38,7 @@ function initMap() {
             infoWindow.setContent('Location found!');
             infoWindow.open(map);
             map.setCenter(pos);
-            getRestaurants(pos);
+            getMovies(pos);
         }, () => {
             // if user denied permission
             handleError(infoWindow);
@@ -65,10 +65,10 @@ function handleError(infoWindow) {
     infoWindow.open(map);
     currentInfoWindow = infoWindow;
 
-    getRestaurants(pos);
+    getMovies(pos);
 }
 
-function getRestaurants(position) {
+function getMovies(position) {
     let request = {
         location: position,
         rankBy: google.maps.places.RankBy.DISTANCE,
@@ -121,11 +121,11 @@ function showMarkerInfo(placeResult, marker, status) {
         placeInfowindow.open(marker.map, marker);
         currentInfoWindow.close();
         currentInfoWindow = placeInfowindow;
-        showRestaurantInfo(placeResult);
+        showMoviesInfo(placeResult);
     } 
 }
 
-function showRestaurantInfo(placeResult) {
+function showMoviesInfo(placeResult) {
     // first clear the previous img
     while (photoElement.lastChild) {
         photoElement.removeChild(photoElement.lastChild);
@@ -200,7 +200,7 @@ function getRating(rating) {
     else if (rating < 4.5) {
         return 'imgs/4-star-rating.jpg';
     }
-    else if (rating > 4.5) {
+    else if (rating >= 4.5) {
         return 'imgs/5-star-rating.jpg';
     }
     else {

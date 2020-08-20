@@ -1,0 +1,34 @@
+.title-font {
+    font-size: 2.7rem;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+#gaming-list {
+    max-width: 30%;
+    overflow-x: hidden;
+    transition: all .2s ease-out;
+    z-index: 1;
+}
+  
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+#map {
+    box-sizing: initial;
+}
+
+.gaming-img {
+    width: 100%;
+    height: 15rem;
+}
+
+.rating-img {
+    width: 5.5rem;
+    height: 0.8rem;
+}
